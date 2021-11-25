@@ -1,0 +1,103 @@
+JSON Server
+
+Get Request
+
+filtering -
+http://localhost:3000/products?category=electronics
+http://localhost:3000/products?category=electronics&discount.type=shipping
+
+sorting -
+http://localhost:3000/products?_sort=price
+http://localhost:3000/products?_sort=price&_order=desc
+http://localhost:3000/products?_sort=price,category&_order=desc,asc
+
+pagination -
+http://localhost:3000/products?_page=1
+http://localhost:3000/products?_page=2
+
+pagination with size -
+http://localhost:3000/products?_page=1&_limit=2
+http://localhost:3000/products?_page=2&_limit=2
+
+operators -
+list products whose price is between 2000 and 6000
+lte = less than equal
+gte = greater than equal
+ne = not equal
+like
+http://localhost:3000/products?price_gte=2000&price_lte=6000
+http://localhost:3000/products?id_ne=1
+http://localhost:3000/products?category_like=^f
+
+full text search in entire json object
+http://localhost:3000/products?q=in
+
+relationships
+fetch child resources
+http://localhost:3000/products?_embed=reviews
+http://localhost:3000/products/1?_embed=reviews
+http://localhost:3000/products/1?_embed=reviews
+fetch parent resources
+http://localhost:3000/reviews?_expand=product
+http://localhost:3000/reviews/1?_expand=product
+
+Post Request
+
+Request type - Post
+url - http://localhost:3000/products
+request body -
+{
+    "id": 11,
+    "title": "Product 11",
+    "category": "electronics",
+    "price": 4000,
+    "description": "This is description about product 11"
+}
+response -
+{
+  "id": 11,
+  "title": "Product 11",
+  "category": "electronics",
+  "price": 4000,
+  "description": "This is description about product 11"
+}
+
+Request type - Put
+Put request requires entire json object
+url - http://localhost:3000/products/11
+request body -
+{
+    "id": 11,
+    "title": "Product 11",
+    "category": "furniture",
+    "price": 4000,
+    "description": "This is description about product 11"
+}
+response -
+{
+  "id": 11,
+  "title": "Product 11",
+  "category": "furniture",
+  "price": 4000,
+  "description": "This is description about product 11"
+}
+
+Request type - Patch
+url - http://localhost:3000/products/11
+request body -
+{
+    "price": 8000,
+}
+response -
+{
+  "id": 11,
+  "title": "Product 11",
+  "category": "furniture",
+  "price": 8000,
+  "description": "This is description about product 11"
+}
+
+Request type - Delete
+url - http://localhost:3000/products/11
+response -
+{}
